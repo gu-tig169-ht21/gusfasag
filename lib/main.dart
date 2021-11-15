@@ -7,7 +7,6 @@ void main() {
 class CheckBoxState {
   final String title;
   bool value;
-
   CheckBoxState({
     required this.title,
     this.value = false,
@@ -18,26 +17,30 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.white,
+        fontFamily: 'Helvetica',
+        unselectedWidgetColor: Colors.pink[100],
+      ),
+      home: const HomePage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final notifications = [
+  final toDos = [
     CheckBoxState(title: 'Träna'),
     CheckBoxState(title: 'Handla'),
     CheckBoxState(title: 'Laga mat'),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +48,19 @@ class _HomePageState extends State<HomePage> {
         title: const Text('To Do List'),
         titleTextStyle: const TextStyle(fontSize: 24, fontFamily: 'helvetica'),
         backgroundColor: Colors.pink[100],
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+          child: const Icon(Icons.menu),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
+            alignment: Alignment.centerRight,
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const SecondView()));
@@ -57,7 +70,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: [
-          ...notifications.map(buildSingleCheckbox).toList(),
+          ...toDos.map(buildSingleCheckbox).toList(),
         ],
       ),
     );
@@ -78,7 +91,6 @@ class _HomePageState extends State<HomePage> {
 
 class SecondView extends StatelessWidget {
   const SecondView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +131,7 @@ class SecondView extends StatelessWidget {
       children: [
         OutlinedButton(
           onPressed: () {},
-          child: const Icon(Icons.add, color: Colors.pink),
+          child: const Icon(Icons.add, color: Colors.black54),
         )
       ],
     );
