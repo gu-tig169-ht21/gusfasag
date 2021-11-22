@@ -27,9 +27,7 @@ class ToDoList extends StatelessWidget {
           onPressed: () {
             Provider.of<MyState>(context, listen: false).deleteItem(todo);
           },
-          icon: const Icon(
-            Icons.delete,
-          ),
+          icon: const Icon(Icons.delete, color: Colors.black38),
         ),
       ),
     );

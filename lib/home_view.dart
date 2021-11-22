@@ -15,15 +15,30 @@ class HomeView extends StatelessWidget {
         backgroundColor: Colors.pink[100],
         actions: [
           PopupMenuButton<int>(
+              color: Colors.pink[100],
               icon: const Icon(Icons.menu, color: Colors.white),
               onSelected: (value) {
                 Provider.of<MyState>(context, listen: false).filter(value);
               },
               itemBuilder: (context) => [
-                    const PopupMenuItem(child: Text('Show all'), value: 0),
-                    const PopupMenuItem(child: Text('Done!'), value: 1),
                     const PopupMenuItem(
-                        child: Text('Not done yet..'), value: 2),
+                        child: Text(
+                          'Show all',
+                          textAlign: TextAlign.right,
+                        ),
+                        textStyle:
+                            TextStyle(color: Colors.white, fontSize: 16.0),
+                        value: 0),
+                    const PopupMenuItem(
+                        child: Text('Done!'),
+                        textStyle:
+                            TextStyle(color: Colors.white, fontSize: 16.0),
+                        value: 1),
+                    const PopupMenuItem(
+                        child: Text('Not done yet..'),
+                        textStyle:
+                            TextStyle(color: Colors.white, fontSize: 16.0),
+                        value: 2),
                   ]),
         ],
       ),
