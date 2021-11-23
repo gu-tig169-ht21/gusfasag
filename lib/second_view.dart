@@ -9,26 +9,29 @@ class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('To Do List'),
-          titleTextStyle: const TextStyle(fontSize: 24),
-          backgroundColor: Colors.pink[100],
-          actions: [
-            MaterialButton(
-              textColor: Colors.white,
-              child: const Icon(Icons.add),
-              onPressed: () {
-                text = textcontroller.text;
-                Provider.of<MyState>(context, listen: false)
-                    .addText(ToDo(todo: text));
-                textcontroller.clear();
-              },
-            ),
-          ]),
-      body: Column(
-        children: [
-          _nameInputField(),
-        ],
+        title: const Text('To Do List'),
+        titleTextStyle: const TextStyle(fontSize: 24),
+        backgroundColor: Colors.pink[100],
       ),
+      body: Column(children: [
+        _nameInputField(),
+        Container(
+          padding: EdgeInsets.all(10),
+        ),
+        FloatingActionButton(
+          backgroundColor: Colors.pink[100],
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            text = textcontroller.text;
+            Provider.of<MyState>(context, listen: false)
+                .addText(ToDo(todo: text));
+            textcontroller.clear();
+          },
+        ),
+      ]),
     );
   }
 
