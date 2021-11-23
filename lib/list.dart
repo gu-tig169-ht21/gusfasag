@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:roundcheckbox/roundcheckbox.dart';
 import 'state.dart';
 
 class ToDoList extends StatelessWidget {
@@ -15,19 +16,22 @@ class ToDoList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: ListTile(
-        leading: Checkbox(
-          value: todo.isDone,
-          onChanged: (bool? value) {
+        leading: RoundCheckBox(
+          isChecked: todo.isDone,
+          onTap: (bool? value) {
             Provider.of<MyState>(context, listen: false).changed(todo, value);
           },
-          activeColor: Colors.pink[100],
+          checkedColor: Colors.pink[100],
+          size: 22.0,
+          checkedWidget: Icon(Icons.check, size: 16, color: Colors.white),
+          borderColor: Colors.pink[100],
         ),
         title: Text(todo.todo, style: const TextStyle(fontSize: 16)),
         trailing: IconButton(
           onPressed: () {
             Provider.of<MyState>(context, listen: false).deleteItem(todo);
           },
-          icon: const Icon(Icons.delete, color: Colors.black38),
+          icon: const Icon(Icons.delete, color: Colors.black26),
         ),
       ),
     );

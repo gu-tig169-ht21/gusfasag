@@ -39,9 +39,11 @@ class SecondView extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       child: TextField(
+          cursorColor: Colors.pink,
           controller: textcontroller,
           decoration: const InputDecoration(
             hintText: 'What´s on your to-do list?',
+            hintStyle: TextStyle(color: Colors.black38),
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.pink),
             ),

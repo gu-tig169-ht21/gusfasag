@@ -9,6 +9,17 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.pink[100],
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SecondView()));
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: const Text('To Do List'),
         titleTextStyle: const TextStyle(fontSize: 24),
@@ -46,16 +57,6 @@ class HomeView extends StatelessWidget {
         builder: (context, state, child) =>
             ToDoList(_filter(state.list, state.filterBy)),
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.pink[100],
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SecondView()));
-          }),
     );
   }
 
