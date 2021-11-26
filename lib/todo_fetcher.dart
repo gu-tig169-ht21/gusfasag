@@ -1,39 +1,57 @@
 import 'state.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 const url = 'https://todoapp-api-pyq5q.ondigitalocean.app';
 const key = 'c21c3919-84e2-4641-b3cc-b1ab992ea921';
 
 class ToDoFetcher {
-  static Future<List<ToDo>> fetchTodo() async {
-    http.Response response = await http.get(Uri.parse('$url/todos?key=$key'));
-    print(response.body);
-    var json = jsonDecode(response.body);
+  static Future fetchTodo() async {
+    var response = await http.get(Uri.parse('$url/todos?key=$key'));
+    String bodyString = response.body;
+    var json = jsonDecode(bodyString);
     return json.map<ToDo>((data) {
       return ToDo.fromJson(data);
     }).toList();
   }
 
-  static Future addTodo(ToDo task) async {
-    var json = jsonEncode(ToDo.toJson(task));
-    print(json);
-    await http.post(
+  static Future<List<ToDo>> addTodo(ToDo task) async {
+    Map<String, dynamic> json = ToDo.toJson(task);
+    var bodyString = jsonEncode(json);
+    var response = await http.post(Uri.parse('$url/todos?key=$key'),
+        body: bodyString, headers: {'Content-type': 'application/json'});
+    bodyString = response.body;
+    var list = jsonDecode(bodyString);
+    return list.map<ToDo>((data) {
+      return ToDo.fromJson(data);
+    }).toList();
+  }
+
+  static Future updateTodo(ToDo task, value) async {
+    String id = task.id;
+    task.done = value;
+    Map<String, dynamic> json = ToDo.toJson(task);
+    var bodyString = jsonEncode(json);
+    await http.put(
       Uri.parse('$url/todos?key=$key'),
-      body: json,
+      body: bodyString,
       headers: {'Content-type': 'application/json'},
     );
   }
 
-  static Future updateTodo(ToDo task, String id) async {
-    var json = jsonEncode(ToDo.toJson(task));
-    print(json);
-    await http.put(Uri.parse('$url/todos/:id?key=$key'),
-        body: json, headers: {'Content-type': 'application/json'});
-  }
-
   static Future deleteTodo(String id) async {
-    await http.delete(Uri.parse('$url/todos/:id?key=$key'));
+    var response = await http.delete(Uri.parse('$url/todos/:id?key=$key'));
+    var bodyString = response.body;
+    var list = jsonDecode(bodyString);
+    return list.map<ToDo>((data) {
+      return ToDo.fromJson(data);
+    }).toList();
   }
 }
+
+/*
+    var bodyString = response.body;
+    var list = jsonDecode(bodyString);
+    return list.map<ToDo>((data) {
+      return ToDo.fromJson(data);
+    }).toList();*/

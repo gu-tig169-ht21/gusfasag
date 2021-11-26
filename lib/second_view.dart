@@ -1,46 +1,49 @@
 import 'package:flutter/material.dart';
-import 'state.dart';
 import 'package:provider/provider.dart';
+import 'state.dart';
 
 class SecondView extends StatelessWidget {
-  final TextEditingController textcontroller = TextEditingController();
-  String text = '';
+  final toDoInputField = TextEditingController();
+
+  SecondView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('To Do List'),
-        titleTextStyle: const TextStyle(fontSize: 24),
+        titleTextStyle: const TextStyle(fontSize: 24, color: Colors.white),
         backgroundColor: Colors.pink[100],
       ),
-      body: Column(children: [
-        _nameInputField(),
-        Container(
-          padding: EdgeInsets.all(10),
-        ),
-        FloatingActionButton(
-          backgroundColor: Colors.pink[100],
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
+      body: Column(
+        children: [
+          _ToDoInputField(),
+          Container(
+            padding: EdgeInsets.all(10),
           ),
-          onPressed: () {
-            text = textcontroller.text;
-            Provider.of<MyState>(context, listen: false)
-                .addText(ToDo(todo: text));
-            textcontroller.clear();
-          },
-        ),
-      ]),
+          FloatingActionButton(
+            backgroundColor: Colors.pink[100],
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Provider.of<MyState>(context, listen: false).addTask(
+                ToDo(title: toDoInputField.text, id: ''),
+              );
+              toDoInputField.clear();
+            },
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _nameInputField() {
+  Widget _ToDoInputField() {
     return Container(
       margin: EdgeInsets.all(10),
       child: TextField(
           cursorColor: Colors.pink,
-          controller: textcontroller,
+          controller: toDoInputField,
           decoration: const InputDecoration(
             hintText: 'What´s on your to-do list?',
             hintStyle: TextStyle(color: Colors.black38),

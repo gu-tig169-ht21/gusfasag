@@ -5,6 +5,7 @@ import 'state.dart';
 
 void main() {
   var state = MyState();
+  state.fetchTodo();
   runApp(
     ChangeNotifierProvider(
       create: (context) => state,
