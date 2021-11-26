@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import 'state.dart';
 
 class SecondView extends StatelessWidget {
-  final toDoInputField = TextEditingController();
-
+  final ToDoInputField = TextEditingController();
   SecondView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -28,9 +27,9 @@ class SecondView extends StatelessWidget {
             ),
             onPressed: () {
               Provider.of<MyState>(context, listen: false).addTask(
-                ToDo(title: toDoInputField.text, id: ''),
+                ToDo(title: ToDoInputField.text, id: ''),
               );
-              toDoInputField.clear();
+              ToDoInputField.clear();
             },
           ),
         ],
@@ -43,7 +42,7 @@ class SecondView extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: TextField(
           cursorColor: Colors.pink,
-          controller: toDoInputField,
+          controller: ToDoInputField,
           decoration: const InputDecoration(
             hintText: 'What´s on your to-do list?',
             hintStyle: TextStyle(color: Colors.black38),
