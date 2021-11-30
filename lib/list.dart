@@ -3,37 +3,40 @@ import 'package:provider/provider.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
 import 'state.dart';
 
-class ToDoList extends StatelessWidget {
+class ToDoList extends StatefulWidget {
   final List<ToDo> list;
   ToDoList(this.list);
   @override
+  State<ToDoList> createState() => _ToDoListState();
+}
+
+class _ToDoListState extends State<ToDoList> {
+  @override
   Widget build(BuildContext context) {
-    return ListView(
-        children: list.map((todo) => _item(todo, context)).toList());
+    return ListView.builder(
+      itemBuilder: (context, index) => _item(context, widget.list[index]),
+      itemCount: widget.list.length,
+    );
   }
 
-  Widget _item(todo, context) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: ListTile(
+  Widget _item(context, task) {
+    return ListTile(
         leading: RoundCheckBox(
-          isChecked: todo.isDone,
-          onTap: (bool? value) {
-            Provider.of<MyState>(context, listen: false).changed(todo, value);
+          isChecked: task.done,
+          onTap: (value) {
+            Provider.of<MyState>(context, listen: false).changed(task, value);
           },
           checkedColor: Colors.pink[100],
           size: 22.0,
           checkedWidget: Icon(Icons.check, size: 16, color: Colors.white),
           borderColor: Colors.pink[100],
         ),
-        title: Text(todo.todo, style: const TextStyle(fontSize: 16)),
+        title: Text(task.title, style: const TextStyle(fontSize: 16)),
         trailing: IconButton(
           onPressed: () {
-            Provider.of<MyState>(context, listen: false).deleteItem(todo);
+            Provider.of<MyState>(context, listen: false).deleteItem(task);
           },
           icon: const Icon(Icons.delete, color: Colors.black26),
-        ),
-      ),
-    );
+        ));
   }
 }
