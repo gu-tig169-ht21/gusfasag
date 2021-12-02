@@ -10,14 +10,17 @@ class SecondView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('To Do List'),
-        titleTextStyle: const TextStyle(fontSize: 24, color: Colors.white),
+        titleTextStyle: const TextStyle(fontSize: 28, color: Colors.white),
         backgroundColor: Colors.pink[100],
       ),
       body: Column(
         children: [
+          Container(
+            padding: EdgeInsets.all(5),
+          ),
           _ToDoInputField(),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(5),
           ),
           FloatingActionButton(
             backgroundColor: Colors.pink[100],
@@ -41,15 +44,17 @@ class SecondView extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       child: TextField(
-          cursorColor: Colors.pink,
-          controller: ToDoInputField,
-          decoration: const InputDecoration(
-            hintText: 'What´s on your to-do list?',
-            hintStyle: TextStyle(color: Colors.black38),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.pink),
-            ),
-          )),
+        style: TextStyle(height: 1.2),
+        cursorColor: Colors.pink[200],
+        textAlign: TextAlign.center,
+        controller: ToDoInputField,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          hintText: 'What´s on your to-do list?',
+          hintStyle: TextStyle(fontSize: 17, color: Colors.black54),
+          border: InputBorder.none,
+        ),
+      ),
     );
   }
 }

@@ -28,19 +28,18 @@ class ToDoFetcher {
   }
 
   static Future updateTodo(ToDo task, value) async {
-    String id = task.id;
     task.done = value;
     Map<String, dynamic> json = ToDo.toJson(task);
     var bodyString = jsonEncode(json);
     await http.put(
-      Uri.parse('$url/todos?key=$key'),
+      Uri.parse('$url/todos/${task.id}?key=$key'),
       body: bodyString,
       headers: {'Content-type': 'application/json'},
     );
   }
 
   static Future deleteTodo(String id) async {
-    var response = await http.delete(Uri.parse('$url/todos/:id?key=$key'));
+    var response = await http.delete(Uri.parse('$url/todos/$id?key=$key'));
     var bodyString = response.body;
     var list = jsonDecode(bodyString);
     return list.map<ToDo>((data) {
@@ -48,10 +47,3 @@ class ToDoFetcher {
     }).toList();
   }
 }
-
-/*
-    var bodyString = response.body;
-    var list = jsonDecode(bodyString);
-    return list.map<ToDo>((data) {
-      return ToDo.fromJson(data);
-    }).toList();*/

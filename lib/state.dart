@@ -36,11 +36,6 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-/*
-  void addTodo(ToDo task) async {
-    list.add(task);
-    notifyListeners();
-  }*/
   void deleteItem(ToDo toDo) async {
     _list = await ToDoFetcher.deleteTodo(toDo.id);
     notifyListeners();
