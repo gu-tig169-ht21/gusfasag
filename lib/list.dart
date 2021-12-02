@@ -27,16 +27,18 @@ class _ToDoListState extends State<ToDoList> {
             Provider.of<MyState>(context, listen: false).changed(task, value);
           },
           checkedColor: Colors.pink[100],
-          size: 22.0,
-          checkedWidget: Icon(Icons.check, size: 16, color: Colors.white),
+          size: 24.0,
+          checkedWidget: const Icon(Icons.check, size: 17, color: Colors.white),
           borderColor: Colors.pink[100],
         ),
-        title: Text(task.title, style: const TextStyle(fontSize: 16)),
+        title: Text(task.title,
+            textAlign: TextAlign.start,
+            style: const TextStyle(fontSize: 17, color: Colors.black87)),
         trailing: IconButton(
           onPressed: () {
             Provider.of<MyState>(context, listen: false).deleteItem(task);
           },
-          icon: const Icon(Icons.delete, color: Colors.black26),
+          icon: Icon(Icons.delete, color: Colors.black26),
         ));
   }
 }

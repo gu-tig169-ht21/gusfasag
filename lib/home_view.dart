@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
         floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.pink[100],
             child: const Icon(
-              Icons.add,
+              Icons.create,
               color: Colors.white,
             ),
             onPressed: () {
@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
           title: const Text('To Do List'),
-          titleTextStyle: const TextStyle(fontSize: 24, color: Colors.white),
+          titleTextStyle: const TextStyle(fontSize: 28, color: Colors.white),
           backgroundColor: Colors.pink[100],
           actions: [
             PopupMenuButton(
@@ -45,17 +45,17 @@ class _HomeViewState extends State<HomeView> {
                             textAlign: TextAlign.right,
                           ),
                           textStyle:
-                              TextStyle(color: Colors.white, fontSize: 16.0),
+                              TextStyle(color: Colors.white, fontSize: 17.0),
                           value: 0),
                       const PopupMenuItem(
                           child: Text('Done!'),
                           textStyle:
-                              TextStyle(color: Colors.white, fontSize: 16.0),
+                              TextStyle(color: Colors.white, fontSize: 17.0),
                           value: 1),
                       const PopupMenuItem(
                           child: Text('Not done yet..'),
                           textStyle:
-                              TextStyle(color: Colors.white, fontSize: 16.0),
+                              TextStyle(color: Colors.white, fontSize: 17.0),
                           value: 2),
                     ]),
           ],
