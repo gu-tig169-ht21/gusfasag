@@ -11,7 +11,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late Object filtervalue = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
